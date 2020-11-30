@@ -1,0 +1,36 @@
+%NAME%
+pacman-mirrors
+
+%VERSION%
+20180604-2
+
+%DESC%
+MSYS2 mirror list for use by pacman
+
+%URL%
+https://msys2.sourceforge.io/
+
+%ARCH%
+any
+
+%BUILDDATE%
+1528360020
+
+%INSTALLDATE%
+1558550637
+
+%PACKAGER%
+Alexey Pavlov <alexpux@gmail.com>
+
+%SIZE%
+1024
+
+%GROUPS%
+base
+
+%LICENSE%
+GPL
+
+%VALIDATION%
+pgp
+
