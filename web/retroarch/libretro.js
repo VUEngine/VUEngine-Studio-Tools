@@ -23,20 +23,32 @@ async function processCommand(evt) {
       init();
       idbfsInit();
       break;
+    case "setRetroArchConfig":
+      retroarchConfig = evt.data.data;
+      break;
+    case "setCoreOptions":
+      coreOptions = evt.data.data;
+      break;
     case "clean":
       cleanupStorage();
       break;
-    case "pause":
-      Module.pauseMainLoop();
+    case "togglePause":
+      keyPress("Space");
       break;
-    case "resume":
-      Module.resumeMainLoop();
+    case "reset":
+      keyPress("F10");
       break;
     case "fullscreen":
-      Module.requestFullscreen(false);
+      Module.requestFullscreen(true);
       break;
-    case "menu":
-      keyPress("F1");
+    case "mute":
+      keyPress("F3");
+      break;
+    case "increaseSaveSlot":
+      keyPress("F7");
+      break;
+    case "decreaseSaveSlot":
+      keyPress("F6");
       break;
     case "loadState":
       Module._cmd_load_state();
@@ -44,14 +56,14 @@ async function processCommand(evt) {
     case "saveState":
       Module._cmd_save_state();
       break;
-    case "screenshot":
-      Module._cmd_take_screenshot();
+    case "rewind":
+      keyPress("ArrowLeft");
       break;
-    case "setRetroArchConfig":
-      retroarchConfig = evt.data.data;
+    case "frameAdvance":
+      keyPress("ArrowUp");
       break;
-    case "setCoreOptions":
-      coreOptions = evt.data.data;
+    case "fastForward":
+      keyPress("ArrowRight");
       break;
   }
 
@@ -98,8 +110,8 @@ function idbfsInit() {
               afs = new BrowserFS.FileSystem.InMemory();
               console.log(
                 "WEBPLAYER: error: " +
-                  e +
-                  " falling back to in-memory filesystem"
+                e +
+                " falling back to in-memory filesystem"
               );
               setupFileSystem("browser");
               preLoadingComplete();
@@ -185,9 +197,13 @@ async function startRetroArch() {
     "/home/web_user/retroarch/userdata/content/config/retroarch.cfg",
   ]);
 
-  Module.setCanvasSize(384 * 5, 224 * 5);
+  Module.setCanvasSize(window.innerWidth, window.innerHeight);
   document.getElementById("canvas").focus();
 }
+
+window.onresize = () => {
+  Module.setCanvasSize(window.innerWidth, window.innerHeight);
+};
 
 var Module = {
   noInitialRun: true,
@@ -213,6 +229,7 @@ function init() {
     16: "shift",
     18: "alt",
     27: "esc",
+    32: "space",
     33: "rePag",
     34: "avPag",
     35: "end",
