@@ -10,3 +10,4 @@ Binaries of tools included in VUEngine Studio.
 - Mednafen by the Mednafen team
 - MSYS by the MinGW Project
 - prog-vb 0.10.0 by William D. Jones
+- Retroarch Web with Beetle VB Core by the RetroArch and Mednafen teams
