@@ -35,6 +35,12 @@ async function processCommand(evt) {
     case "keyPress":
       keyPress(evt.data.data);
       break;
+    case "keydown":
+      keyDown(evt.data.data);
+      break;
+    case "keyup":
+      keyUp(evt.data.data);
+      break;
   }
 }
 window.addEventListener("message", processCommand);
@@ -159,7 +165,7 @@ async function startRetroArch() {
   );
 
   Module.callMain([
-    //  "-v",
+    "-v",
     "/home/web_user/retroarch/userdata/content/rom/output.vb",
     "--appendconfig",
     "/home/web_user/retroarch/userdata/content/config/retroarch.cfg",
@@ -189,11 +195,19 @@ var Module = {
   },
 };
 
-function keyPress(k) {
+function keyDown(keyCode) {
   canvas.focus();
-  document.dispatchEvent(new KeyboardEvent("keydown", { code: k }))
-  setTimeout(function () {
-    document.dispatchEvent(new KeyboardEvent("keyup", { code: k }))
-  }, 50);
+  document.dispatchEvent(new KeyboardEvent("keydown", { code: keyCode }))
   canvas.blur();
+}
+
+function keyUp(keyCode) {
+  canvas.focus();
+  document.dispatchEvent(new KeyboardEvent("keyup", { code: keyCode }))
+  canvas.blur();
+}
+
+function keyPress(keyCode) {
+  keyDown(keyCode);
+  setTimeout(function () { keyUp(keyCode); }, 50);
 }
