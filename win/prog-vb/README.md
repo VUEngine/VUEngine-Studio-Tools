@@ -1,5 +1,5 @@
 # Command Line Virtual Boy Flash Programmer
-[![Build Status](https://travis-ci.org/cr1901/prog-vb.svg?branch=master)](https://travis-ci.org/cr1901/prog-vb)
+[![Build Status](https://github.com/cr1901/prog-vb/actions/workflows/ci.yml/badge.svg)](https://github.com/cr1901/prog-vb/actions)
 [![GitHub release](https://img.shields.io/github/release/cr1901/prog-vb.svg)](https://github.com/cr1901/prog-vb/releases)
 [![GitHub license](https://img.shields.io/github/license/cr1901/prog-vb.svg)](https://github.com/cr1901/prog-vb/blob/master/LICENSE.md)
 [![Last commit](https://img.shields.io/github/last-commit/cr1901/prog-vb.svg)](https://GitHub.com/cr1901/prog-vb/commit/)
@@ -17,9 +17,17 @@ changes to my homebrew (of course I have worse concentration problems that
 prematurely "ended" my VB homebrew career :P).
 
 In addition, Mac/Linux users may find this application useful, since I'm
-unaware of a Mac/Linux-based solution for FlashBoy. I am looking into hosting
-binaries for all OSes using Github releases or perhaps on
-[Planet VB](https://www.planetvb.com).
+unaware of a Mac/Linux-based solution for FlashBoy. Releases can be found
+[here](https://github.com/cr1901/prog-vb/releases). Currently releases are
+made for the following Rust targets:
+
+* `aarch64-unknown-linux-gnu`
+* `armv7-unknown-linux-gnueabihf`
+* `x86_64-apple-darwin`
+* `x86_64-unknown-linux-gnu`
+* `x86_64-pc-windows-gnu`
+
+If you want a new target added to CI, ask me and I'll make a point release.
 
 Why did I make this? For fun, mostly. I wanted an excuse to write some Rust.
 And I've always wanted an open source version of the programmer :).
@@ -40,9 +48,7 @@ the program anyway. You should only need to do this once. _There is not much I
 can do about this at present, as I don't have a code-signing certificate._
 
 ## TODO
-* Automatic padding of ROMs.
-* Skip erase/erase-only option.
-* Pad-only mode.
+* Developer Mode for quick flashing.
 * Unexpected responses from FlashBoy are handled by failing immediately,
   without a good error message. I've yet to determine what types of
   messages to expect if programming fails.
