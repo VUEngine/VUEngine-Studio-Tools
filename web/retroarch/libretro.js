@@ -16,6 +16,15 @@ let dataURItoBuffer = (dataURI) => {
 
   return ia;
 };
+function bufferToBase64(uint8array) {
+  var output = [];
+
+  for (var i = 0, length = uint8array.length; i < length; i++) {
+    output.push(String.fromCharCode(uint8array[i]));
+  }
+
+  return btoa(output.join(''));
+};
 
 async function processCommand(evt) {
   switch (evt.data.command) {
@@ -40,6 +49,9 @@ async function processCommand(evt) {
       break;
     case "keyup":
       keyUp(evt.data.data);
+      break;
+    case "sendScreenshot":
+      sendScreenshot();
       break;
   }
 }
@@ -163,6 +175,18 @@ async function startRetroArch() {
 window.onresize = () => {
   Module.setCanvasSize(window.innerWidth, window.innerHeight);
 };
+
+function sendScreenshot() {
+  const binaryBuffer = FS.readFile("/home/web_user/retroarch/userdata/output.png", {
+    flags: 'r',
+    encoding: 'binary'
+  });
+  const b64 = bufferToBase64(binaryBuffer);
+  parent.postMessage({
+    "type": "screenshot",
+    "data": b64
+  }, "*")
+}
 
 var Module = {
   noInitialRun: true,
