@@ -131,25 +131,13 @@ function setupFileSystem(backend) {
 }
 
 async function startRetroArch() {
-  FS.createPath(
-    "/",
-    "home/web_user/retroarch/userdata/content/rom",
-    true,
-    true
-  );
   await FS.writeFile(
-    "/home/web_user/retroarch/userdata/content/rom/output.vb",
+    "/home/web_user/retroarch/userdata/output.vb",
     romData
   );
 
-  FS.createPath(
-    "/",
-    "home/web_user/retroarch/userdata/content/config",
-    true,
-    true
-  );
   await FS.writeFile(
-    "/home/web_user/retroarch/userdata/content/config/retroarch.cfg",
+    "/home/web_user/retroarch/userdata/retroarch.cfg",
     retroarchConfig
   );
 
@@ -166,9 +154,7 @@ async function startRetroArch() {
 
   Module.callMain([
     "-v",
-    "/home/web_user/retroarch/userdata/content/rom/output.vb",
-    "--appendconfig",
-    "/home/web_user/retroarch/userdata/content/config/retroarch.cfg",
+    "/home/web_user/retroarch/userdata/output.vb"
   ]);
 
   Module.setCanvasSize(window.innerWidth, window.innerHeight);
