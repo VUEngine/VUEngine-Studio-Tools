@@ -177,15 +177,28 @@ window.onresize = () => {
 };
 
 function sendScreenshot() {
-  const binaryBuffer = FS.readFile("/home/web_user/retroarch/userdata/output.png", {
-    flags: 'r',
-    encoding: 'binary'
-  });
-  const b64 = bufferToBase64(binaryBuffer);
-  parent.postMessage({
-    "type": "screenshot",
-    "data": b64
-  }, "*")
+  const d = new Date();
+  const timestamp = ("" + d.getFullYear()).slice(-2) +
+    ("0" + (d.getMonth() + 1)).slice(-2) +
+    ("0" + d.getDate()).slice(-2) +
+    "-" +
+    ("0" + d.getHours()).slice(-2) +
+    ("0" + d.getMinutes()).slice(-2) +
+    ("0" + d.getSeconds()).slice(-2);
+  const filename = "output-" + timestamp + ".png";
+
+  setTimeout(() => {
+    const binaryBuffer = FS.readFile("/home/web_user/retroarch/userdata/" + filename, {
+      flags: 'r',
+      encoding: 'binary'
+    });
+    const b64 = bufferToBase64(binaryBuffer);
+    parent.postMessage({
+      "type": "screenshot",
+      "data": b64,
+      "filename": filename,
+    }, "*");
+  }, 150);
 }
 
 var Module = {
