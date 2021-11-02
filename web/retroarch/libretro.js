@@ -38,9 +38,6 @@ async function processCommand(evt) {
     case "setCoreOptions":
       coreOptions = evt.data.data;
       break;
-    case "clean":
-      cleanupStorage();
-      break;
     case "keyPress":
       keyPress(evt.data.data);
       break;
@@ -56,24 +53,6 @@ async function processCommand(evt) {
   }
 }
 window.addEventListener("message", processCommand);
-
-function cleanupStorage() {
-  localStorage.clear();
-  if (BrowserFS.FileSystem.IndexedDB.isAvailable()) {
-    var req = indexedDB.deleteDatabase("RetroArch");
-    req.onsuccess = function () {
-      console.log("Deleted database successfully");
-    };
-    req.onerror = function () {
-      console.log("Couldn't delete database");
-    };
-    req.onblocked = function () {
-      console.log(
-        "Couldn't delete database due to the operation being blocked"
-      );
-    };
-  }
-}
 
 function idbfsInit() {
   var imfs = new BrowserFS.FileSystem.InMemory();
@@ -170,6 +149,8 @@ async function startRetroArch() {
   ]);
 
   Module.setCanvasSize(window.innerWidth, window.innerHeight);
+
+  notifyLoaded();
 }
 
 window.onresize = () => {
@@ -199,6 +180,12 @@ function sendScreenshot() {
       "filename": filename,
     }, "*");
   }, 150);
+}
+
+function notifyLoaded() {
+  parent.postMessage({
+    "type": "loaded",
+  }, "*");
 }
 
 var Module = {
