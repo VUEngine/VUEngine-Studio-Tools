@@ -29,8 +29,8 @@ function bufferToBase64(uint8array) {
 async function processCommand(evt) {
   switch (evt.data.command) {
     case "start":
-      romData = dataURItoBuffer(evt.data.data);
-      idbfsInit();
+      romData = dataURItoBuffer(evt.data.data.rom);
+      idbfsInit(evt.data.data.namespace);
       break;
     case "setRetroArchConfig":
       retroarchConfig = evt.data.data;
@@ -54,7 +54,7 @@ async function processCommand(evt) {
 }
 window.addEventListener("message", processCommand);
 
-function idbfsInit() {
+function idbfsInit(namespace) {
   var imfs = new BrowserFS.FileSystem.InMemory();
   if (BrowserFS.FileSystem.IndexedDB.isAvailable()) {
     afs = new BrowserFS.FileSystem.AsyncMirror(
@@ -85,7 +85,7 @@ function idbfsInit() {
             }
           });
         }
-      }, "RetroArch")
+      }, "RetroArch " + namespace)
     );
   }
 }
