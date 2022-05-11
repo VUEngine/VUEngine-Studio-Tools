@@ -50,6 +50,9 @@ async function processCommand(evt) {
     case "sendScreenshot":
       sendScreenshot();
       break;
+    case "saveSram":
+      Module._cmd_savefiles();
+      break;
   }
 }
 window.addEventListener("message", processCommand);
