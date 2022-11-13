@@ -53,6 +53,9 @@ async function processCommand(evt) {
     case "saveSram":
       Module._cmd_savefiles();
       break;
+    case "deleteSram":
+      deleteSram();
+      break;
   }
 }
 window.addEventListener("message", processCommand);
@@ -183,6 +186,11 @@ function sendScreenshot() {
       "filename": filename,
     }, "*");
   }, 150);
+}
+
+async function deleteSram() {
+  await FS.writeFile("/home/web_user/retroarch/userdata/saves/output.srm", "0");
+  console.info("Deleted /home/web_user/retroarch/userdata/saves/output.srm");
 }
 
 function notifyLoaded() {
