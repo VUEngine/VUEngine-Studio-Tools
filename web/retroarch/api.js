@@ -50,8 +50,11 @@ async function processCommand(evt) {
     case "sendScreenshot":
       sendScreenshot();
       break;
+    case "sendSram":
+      sendSram();
+      break;
     case "saveSram":
-      Module._cmd_savefiles();
+      saveSram();
       break;
     case "deleteSram":
       deleteSram();
@@ -184,6 +187,25 @@ function sendScreenshot() {
       "type": "screenshot",
       "data": b64,
       "filename": filename,
+    }, "*");
+  }, 150);
+}
+
+function saveSram() {
+  Module._cmd_savefiles();
+}
+
+function sendSram() {
+  saveSram();
+  setTimeout(() => {
+    const binaryBuffer = FS.readFile("/home/web_user/retroarch/userdata/saves/output.srm", {
+      flags: 'r',
+      encoding: 'binary'
+    });
+    const b64 = bufferToBase64(binaryBuffer);
+    parent.postMessage({
+      "type": "sram",
+      "data": b64,
     }, "*");
   }, 150);
 }
