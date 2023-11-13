@@ -5,7 +5,7 @@ Binaries of tools included in VUEngine Studio.
 ### Included tools
 
 - GCC 4.7 by the GNU Project, with patches for V810 by ElmerPCFX
-- GNU Make 4.4.1 by the GNU Project
+- GNU Make 4.3 by the GNU Project
 - Grit 0.8.6 by Jasper Vijn, with patches for Virtual Boy by dasi
 - HyperBoyCli 2.0.0.0 by thunderstruck
 - HyperFlasherCli 1.1.0.0 by thunderstruck
