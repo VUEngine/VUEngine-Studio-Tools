@@ -1,6 +1,6 @@
 ## VUEngine Studio Tools
 
-Binaries of tools included in VUEngine Studio.
+Executables of tools included with VUEngine Studio.
 
 ### Included tools
 
