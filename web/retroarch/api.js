@@ -183,7 +183,7 @@ function sendScreenshot() {
       encoding: 'binary'
     });
     const b64 = bufferToBase64(binaryBuffer);
-    parent.postMessage({
+    window.postMessage({
       "type": "screenshot",
       "data": b64,
       "filename": filename,
@@ -203,7 +203,7 @@ function sendSram() {
       encoding: 'binary'
     });
     const b64 = bufferToBase64(binaryBuffer);
-    parent.postMessage({
+    window.postMessage({
       "type": "sram",
       "data": b64,
     }, "*");
@@ -216,7 +216,7 @@ async function deleteSram() {
 }
 
 function notifyLoaded() {
-  parent.postMessage({
+  window.postMessage({
     "type": "loaded",
   }, "*");
 }
