@@ -12,3 +12,4 @@ Executables of tools included with VUEngine Studio.
 - MSYS by the MinGW Project
 - prog-vb 0.11.0 by William D. Jones
 - Retroarch Web with Beetle VB Core by the RetroArch and Mednafen teams
+- vsu-emulator by KR155E, based on Rustual Boy's VSU code by Ferris
