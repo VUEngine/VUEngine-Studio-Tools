@@ -6,6 +6,7 @@ Executables of tools included with VUEngine Studio.
 
 - GCC 4.7 by the GNU Project, with patches for V810 by ElmerPCFX
 - GNU Make 4.3 by the GNU Project
+- clang-format 19.1.5 by the GNU Project
 - Grit 0.8.6 by Jasper Vijn, with patches for Virtual Boy by dasi
 - HyperBoyCli 2.0.0.0 by thunderstruck
 - HyperFlasherCli 1.1.0.0 by thunderstruck
