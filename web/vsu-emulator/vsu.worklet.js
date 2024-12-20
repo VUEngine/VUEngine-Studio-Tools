@@ -471,7 +471,7 @@ class VsuEmulator extends AudioWorkletProcessor {
             case 'ch5ModFrequency': this.vsu.channel5.setModFrequency(e.data.data); break;
             case 'ch5ModRepeat': this.vsu.channel5.regModRepeat = !!e.data.data; break;
             case 'ch5SweepShift': this.vsu.channel5.regSweepShiftAmount = e.data.data; break;
-            case 'ch6TapLocation': this.vsu.channel6.regNoiseControl = e.data.data; break;
+            case 'ch6Tap': this.vsu.channel6.regNoiseControl = e.data.data; break;
             case 'ch1Waveform': this.vsu.channel1.waveform = e.data.data; break;
             case 'ch2Waveform': this.vsu.channel2.waveform = e.data.data; break;
             case 'ch3Waveform': this.vsu.channel3.waveform = e.data.data; break;
