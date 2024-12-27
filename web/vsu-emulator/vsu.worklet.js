@@ -500,6 +500,8 @@ class VsuEmulator extends AudioWorkletProcessor {
 
         this.vsu.cycles(leftChannel.length, output);
 
+        this.port.postMessage('tick');
+
         return true;
     }
 };
