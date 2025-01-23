@@ -1,0 +1,4 @@
+linux/doxygen/doxygen filter=lfs diff=lfs merge=lfs -text
+osx/doxygen/doxygen filter=lfs diff=lfs merge=lfs -text
+win/doxygen/libclang.dll filter=lfs diff=lfs merge=lfs -text
+win/doxygen/doxygen.exe filter=lfs diff=lfs merge=lfs -text

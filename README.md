@@ -5,7 +5,7 @@ Executables of tools included with VUEngine Studio.
 ### Included tools
 
 - clang-format 19.1.6 by the GNU Project
-- doxygen 1.12.0 by Dimitri van Heesch
+- doxygen 1.13.2 by Dimitri van Heesch
 - GCC 4.7 by the GNU Project, with patches for V810 by ElmerPCFX
 - GNU Make 4.3 by the GNU Project
 - Grit 0.8.6 by Jasper Vijn, with patches for Virtual Boy by dasi
