@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "prePackage": "npm run unzipLinuxDoxygen && npm run unzipOsxDoxygen && npm run unzipWinLibclangDll",
+    "unzipLinuxDoxygen": "cd linux/doxygen && unzip doxygen.zip && rm doxygen.zip && rm -r __MACOSX && cd ../..",
+    "unzipOsxDoxygen": "cd osx/doxygen && unzip doxygen.zip && rm doxygen.zip && rm -r __MACOSX && cd ../..",
+    "unzipWinLibclangDll": "cd win/doxygen && unzip libclang.dll.zip && rm libclang.dll.zip && rm -r __MACOSX && cd ../.."
+  }
+}
