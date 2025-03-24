@@ -1,0 +1,39 @@
+{%- import 'templates/partials/macros.njk' as macros -%}
+{%- set itemNames = [] -%}
+{%- set customWaveForms = [] -%}
+{%- if project.items.WaveForm is defined -%}
+{%- for item in project.items.WaveForm | values | unique('_fileUri') -%}
+	{%- if item._contributor != 'project' -%}
+		{%- set itemSanitizedSpecName = item._fileUri | basename(false) | sanitizeSpecName -%}
+		{{- macros.append(itemNames, itemSanitizedSpecName) -}}
+	{%- else -%}
+		{{- macros.append(customWaveForms, item) -}}
+	{%- endif -%}
+{%- endfor -%}
+{%- endif -%}
+{% include('templates/partials/fileHeader/fileHeader.h.njk') %}
+
+#ifndef WAVEFORMS_H_
+#define WAVEFORMS_H_
+{% if customWaveForms %}
+{{ macros.sectionHeader('Definitions') }}
+{% for customWaveForm in customWaveForms -%}
+{%- set sanitizedSpecName = customWaveForm._fileUri | basename(false) | sanitizeSpecName %}
+const int8 {{ sanitizedSpecName }}WaveForm[] =
+{
+	{% for value in customWaveForm.values -%}
+	{%- if value - 1 < 10 -%}{{ ' ' }} {%- endif -%}
+	{{- value - 1 -}}{{- ', '-}} 
+	{%- if loop.index % 16 == 0 and not loop.last %}{{ "\n	" }}{% endif -%}
+	{%- endfor %}
+};
+{% endfor -%}
+{%- endif %}
+{{ macros.sectionHeader('Declarations') }}
+
+{% if itemNames %}
+{%- for itemName in itemNames | sort -%}
+extern const int8 {{ itemName }}WaveForm[];
+{% endfor -%}
+{% endif %}
+#endif
