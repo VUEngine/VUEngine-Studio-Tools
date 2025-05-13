@@ -62,6 +62,7 @@ typedef struct SoundTrackSpec
 	uint32 trackType;
 	bool skippable;
 	uint32 samples;
+	uint32 loopPointCursor;
 	SoundTrackKeyframe* trackKeyframes;
 	uint8* SxINT;
 	uint8* SxLRV;
