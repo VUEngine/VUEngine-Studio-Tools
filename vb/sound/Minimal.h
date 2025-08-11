@@ -46,6 +46,14 @@ enum SoundTrackTypes
 	kTrackPCM
 };
 
+// WAVEFORM DATA
+
+typedef struct WaveformData
+{
+	int8 data[32];
+	uint32 crc;
+} WaveformData;
+
 // SOUND TRACK KEYFRAME
 
 typedef struct SoundTrackKeyframe
