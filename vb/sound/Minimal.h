@@ -46,6 +46,31 @@ enum SoundTrackTypes
 	kTrackPCM
 };
 
+// COMPONENTS
+
+extern void* Sound_new(void*, void*);
+#define __TYPE(ClassName) ClassName ## _new
+typedef void (*AllocatorPointer)();
+
+typedef struct ComponentSpec
+{
+	AllocatorPointer allocator;
+	uint16 componentType;
+} ComponentSpec;
+
+enum ComponentTypes
+{
+	kSpriteComponent = 0,
+	kColliderComponent,
+	kPhysicsComponent,
+	kWireframeComponent,
+	kMutatorComponent,
+	kBehaviorComponent,
+	kSoundComponent,
+
+	kComponentTypes,
+};
+
 // WAVEFORM DATA
 
 typedef struct WaveformData
@@ -77,7 +102,7 @@ typedef struct SoundTrackSpec
 	uint16* SxFQ;
 	uint8* SxEV0;
 	uint8* SxEV1;
-	int8** SxRAM;
+	WaveformData** SxRAM;
 	uint8* SxSWP;
 	int8** SxMOD;
 } SoundTrackSpec;
@@ -88,6 +113,7 @@ typedef const SoundTrackSpec SoundTrackROMSpec;
 
 typedef struct SoundSpec
 {
+	ComponentSpec componentSpec;
 	char* name;
 	bool loop;
 	uint16 targetTimerResolutionUS;
