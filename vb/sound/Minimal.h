@@ -46,6 +46,14 @@ enum SoundTrackTypes
 	kTrackPCM
 };
 
+enum SoundGroup
+{
+	kSoundGroupNone = 0,
+	kSoundGroupMusic,
+	kSoundGroupEffects,
+	kSoundGroupOther
+};
+
 // COMPONENTS
 
 extern void* Sound_new(void*, void*);
@@ -118,6 +126,7 @@ typedef struct SoundSpec
 	bool loop;
 	uint16 targetTimerResolutionUS;
 	SoundTrackSpec** soundTrackSpecs;
+	uint32 volumeGroup;
 } SoundSpec;
 
 typedef const SoundSpec SoundROMSpec;
