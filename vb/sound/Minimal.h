@@ -48,7 +48,7 @@ enum SoundTrackTypes
 
 enum SoundGroup
 {
-	kSoundGroupNone = 0,
+	kSoundGroupGeneral = 0,
 	kSoundGroupMusic,
 	kSoundGroupEffects,
 	kSoundGroupOther
