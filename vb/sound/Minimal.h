@@ -40,12 +40,6 @@ enum SoundEvents
 	kSoundTrackEventNoise = 1 << (11)
 };
 
-enum SoundTrackTypes
-{
-	kTrackNative = 0,
-	kTrackPCM
-};
-
 enum SoundGroup
 {
 	kSoundGroupGeneral = 0,
@@ -100,9 +94,8 @@ typedef struct SoundTrackKeyframe
 
 typedef struct SoundTrackSpec
 {
-	uint32 trackType;
+	uint8 priority;
 	bool skippable;
-	uint32 samples;
 	uint32 loopPointCursor;
 	SoundTrackKeyframe* trackKeyframes;
 	uint8* SxINT;
@@ -123,6 +116,7 @@ typedef struct SoundSpec
 {
 	ComponentSpec componentSpec;
 	char* name;
+	char* author;
 	bool loop;
 	uint16 targetTimerResolutionUS;
 	SoundTrackSpec** soundTrackSpecs;
