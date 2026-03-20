@@ -28,6 +28,10 @@ enum SoundEvents
 {
 	kSoundTrackEventEnd = 1 << (0),
 	kSoundTrackEventStart = 1 << (1),
+};
+
+enum VBSoundEvents
+{
 	kSoundTrackEventSxINT = 1 << (2),
 	kSoundTrackEventSxLRV = 1 << (3),
 	kSoundTrackEventSxFQ = 1 << (4),
@@ -52,6 +56,7 @@ enum SoundGroup
 // COMPONENTS
 
 extern void* Sound_new(void*, void*);
+extern void* VSUSoundTrack_new(void*, void*);
 #define __TYPE(ClassName) ClassName ## _new
 typedef void (*AllocatorPointer)();
 
@@ -88,17 +93,23 @@ typedef struct SoundTrackKeyframe
 {
 	uint16 tick;
 	uint16 events;
-
 } SoundTrackKeyframe;
 
 // SOUND TRACK SPEC
 
 typedef struct SoundTrackSpec
 {
+	AllocatorPointer allocator;
 	uint8 priority;
-	bool skippable;
+	bool skip;
 	uint32 loopPointCursor;
 	SoundTrackKeyframe* trackKeyframes;
+} SoundTrackSpec;
+typedef const SoundTrackSpec SoundTrackROMSpec;
+
+typedef struct VSUSoundTrackSpec
+{
+	SoundTrackSpec soundTrackSpec;
 	uint8* SxINT;
 	uint8* SxLRV;
 	uint16* SxFQ;
@@ -107,9 +118,9 @@ typedef struct SoundTrackSpec
 	WaveformData** SxRAM;
 	uint8* SxSWP;
 	int8** SxMOD;
-} SoundTrackSpec;
+} VSUSoundTrackSpec;
+typedef const VSUSoundTrackSpec VSUSoundTrackROMSpec;
 
-typedef const SoundTrackSpec SoundTrackROMSpec;
 
 // SOUND SPEC
 
@@ -121,9 +132,8 @@ typedef struct SoundSpec
 	bool loop;
 	uint16 targetTimerResolutionUS;
 	SoundTrackSpec** soundTrackSpecs;
-	uint32 volumeGroup;
+	uint32 soundGroup;
 } SoundSpec;
-
 typedef const SoundSpec SoundROMSpec;
 
 #endif
